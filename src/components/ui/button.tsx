@@ -5,26 +5,24 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft hover:shadow-warm hover:scale-105",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-soft",
-        outline:
-          "border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground shadow-soft hover:shadow-warm",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-soft",
-        ghost: "hover:bg-accent/10 hover:text-accent transition-smooth",
-        link: "text-primary underline-offset-4 hover:underline",
-        booking: "bg-gradient-hero text-white hover:shadow-warm hover:scale-105 font-semibold tracking-wide",
-        social: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-soft hover:shadow-warm",
+        default: "bg-foreground text-background rounded-lg hover:bg-foreground/90",
+        destructive: "bg-destructive text-destructive-foreground rounded-lg hover:bg-destructive/90",
+        outline: "border border-foreground bg-transparent text-foreground rounded-lg hover:bg-foreground hover:text-background",
+        secondary: "bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80",
+        ghost: "hover:bg-secondary rounded-lg",
+        link: "text-foreground underline-offset-4 hover:underline",
+        primary: "bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 shadow-md hover:shadow-lg",
+        social: "bg-secondary text-foreground rounded-full hover:bg-secondary/80 border border-border",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 px-4",
+        lg: "h-12 px-8 text-base",
+        xl: "h-14 px-10 text-lg",
         icon: "h-10 w-10",
       },
     },
