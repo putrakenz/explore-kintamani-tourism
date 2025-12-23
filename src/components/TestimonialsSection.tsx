@@ -1,111 +1,123 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Star, Quote } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    location: "Australia",
+    name: "Sarah",
+    avatar: "S",
+    location: "Melbourne, Australia",
+    date: "December 2024",
     rating: 5,
-    text: "The jeep tour was absolutely incredible! Our guide was knowledgeable and the sunrise view from Mount Batur was breathtaking. Definitely the highlight of our Bali trip!",
-    experience: "Jeep Tour"
+    text: "The jeep tour was absolutely incredible! Our guide Made was so knowledgeable and the sunrise view from Mount Batur was breathtaking. One of the best experiences of our Bali trip.",
   },
   {
-    name: "Marco Rodriguez",
-    location: "Spain",
+    name: "Marco",
+    avatar: "M",
+    location: "Barcelona, Spain",
+    date: "November 2024",
     rating: 5,
-    text: "Glamping experience exceeded all expectations. Waking up to the mountain view was magical. The staff was super friendly and the facilities were top-notch.",
-    experience: "Glamping"
+    text: "Glamping experience exceeded all expectations. Waking up to the mountain view was magical. The staff went above and beyond. Highly recommend!",
   },
   {
-    name: "Yuki Tanaka",
-    location: "Japan",
+    name: "Yuki",
+    avatar: "Y",
+    location: "Tokyo, Japan",
+    date: "October 2024",
     rating: 5,
-    text: "The culinary tour opened our eyes to authentic Balinese culture. Learning to cook traditional dishes and visiting the local village was an unforgettable experience.",
-    experience: "Culinary Tour"
+    text: "The culinary tour opened our eyes to authentic Balinese culture. Learning to cook traditional dishes and visiting the local village was unforgettable.",
   },
   {
-    name: "Emma Thompson",
-    location: "UK",
+    name: "Emma",
+    avatar: "E",
+    location: "London, UK",
+    date: "September 2024",
     rating: 5,
-    text: "Professional service from start to finish. The team went above and beyond to make our experience special. Can't wait to come back with friends!",
-    experience: "All Tours"
+    text: "Professional service from start to finish. The team made our honeymoon extra special. Can't wait to come back!",
   },
-  {
-    name: "David Chen",
-    location: "Singapore",
-    rating: 5,
-    text: "Best decision we made in Bali! The combination of adventure and comfort was perfect. Highly recommend to anyone looking for an authentic Kintamani experience.",
-    experience: "Jeep + Glamping"
-  },
-  {
-    name: "Lisa Mueller",
-    location: "Germany",
-    rating: 5,
-    text: "The attention to detail was amazing. From pickup to drop-off, everything was perfectly organized. The photography spots were incredible!",
-    experience: "Jeep Tour"
-  }
 ];
 
 const TestimonialsSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
-    <section id="testimonials" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            What Our Travelers Say
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Real experiences from real people who've explored Kintamani with us.
-          </p>
+    <section id="testimonials" className="py-16 bg-secondary">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              What guests are saying
+            </h2>
+            <div className="flex items-center gap-2 mt-2">
+              <Star className="w-5 h-5 fill-foreground" />
+              <span className="font-semibold">4.96</span>
+              <span className="text-muted-foreground">· 368 reviews</span>
+            </div>
+          </div>
+          
+          {/* Navigation Arrows */}
+          <div className="flex gap-2">
+            <button 
+              onClick={prevSlide}
+              className="p-2 rounded-full border border-border hover:border-foreground transition-colors disabled:opacity-50"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="p-2 rounded-full border border-border hover:border-foreground transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="group hover:shadow-warm transition-all duration-500 hover:scale-105 border-0 shadow-soft relative overflow-hidden">
-              <CardContent className="p-6">
-                <div className="absolute top-4 right-4 text-primary/20">
-                  <Quote className="w-8 h-8" />
-                </div>
-                
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  "{testimonial.text}"
-                </p>
-                
-                <div className="border-t border-border pt-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-primary">{testimonial.experience}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center space-x-4 bg-secondary rounded-xl px-8 py-4">
-            <div className="flex items-center">
-              <div className="flex mr-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+        {/* Reviews Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {testimonials.map((review, index) => (
+            <div 
+              key={index} 
+              className="bg-card p-6 rounded-xl border border-border hover:shadow-card transition-shadow"
+            >
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
+                {[...Array(review.rating)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 fill-foreground" />
                 ))}
               </div>
-              <span className="text-lg font-bold text-foreground">4.9/5</span>
+              
+              {/* Review Text */}
+              <p className="text-foreground text-sm leading-relaxed mb-4 line-clamp-4">
+                "{review.text}"
+              </p>
+              
+              {/* Reviewer Info */}
+              <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <div className="w-10 h-10 bg-foreground rounded-full flex items-center justify-center">
+                  <span className="text-background font-semibold">{review.avatar}</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-sm">{review.name}</p>
+                  <p className="text-muted-foreground text-xs">{review.date}</p>
+                </div>
+              </div>
             </div>
-            <div className="w-px h-6 bg-border"></div>
-            <span className="text-muted-foreground">Based on 500+ reviews</span>
-          </div>
+          ))}
+        </div>
+
+        {/* Show All Reviews */}
+        <div className="mt-8">
+          <button className="px-6 py-3 border border-foreground rounded-lg font-semibold hover:bg-card transition-colors">
+            Show all 368 reviews
+          </button>
         </div>
       </div>
     </section>
